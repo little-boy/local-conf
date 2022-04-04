@@ -1,0 +1,25 @@
+## lang / chars...
+export LC_ALL=fr_FR.UTF-8
+
+## custom aliases
+alias dc=docker-compose
+
+# k8s
+export KUBE_EDITOR="atom --wait"
+# clean old k8s jobs
+function kcleanjobs () {
+  kubectl get jobs | grep 0/1 | grep -v "^1d$" |  grep -v "m$" | awk '{print $1}' | xargs kubectl delete jobs
+}
+alias kx=kubectx
+
+## fzf cfg
+fpath=(~/.zsh/completions $fpath)
+
+# git
+## quick rebase from branch in arg
+function greb () {
+  git checkout "$1" && git pull origin "$1" && git checkout - && git rebase "$1"
+}
+
+# custom prompt
+PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %D %T % %{$reset_color%}'

@@ -1,0 +1,12 @@
+## lang / chars...
+export LC_ALL=fr_FR.UTF-8
+
+# theme
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+# custom prompt
+PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %D %T % %{$reset_color%}'
+
+plugins=(z git zsh-autosuggestions docker docker-compose kubectl history)
+source $ZSH/oh-my-zsh.sh

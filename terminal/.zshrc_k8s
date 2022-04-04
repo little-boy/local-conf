@@ -1,0 +1,13 @@
+# k8s
+export KUBE_EDITOR="atom --wait"
+# clean old k8s jobs
+function kcleanjobs () {
+  kubectl get jobs | grep 0/1 | grep -v "^1d$" |  grep -v "m$" | awk '{print $1}' | xargs kubectl delete jobs
+}
+alias kx=kubectx
+
+## fzf cfg
+fpath=(~/.zsh/completions $fpath)
+
+# kubetcl lazy load
+(( ${+commands[kubectl]} )) && alias kubectl='test -z $C_KUBE && C_KUBE=1 && source <(command kubectl completion zsh); command kubectl'
